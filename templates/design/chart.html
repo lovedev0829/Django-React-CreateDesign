@@ -1,0 +1,132 @@
+{% extends "web/app/app_base.html" %}
+{% load static %}
+{% load i18n %}
+{% block app %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/concrete-optimizer.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/mix-design-editable-table-style.css' %}">
+
+
+<!-- This is generated. -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+
+<!-- -------------------------------------------------------------------- -->
+
+
+<div class="app-card">
+
+
+    {% comment %}
+    <div id="nivo-pie-chart-root"></div>
+    <script src="{% static 'js/nivo-pie-chart-bundle.js' %}"></script>
+    {% endcomment %}
+
+
+    <div class="p-6">
+        <h1 class="text-2xl font-semibold mb-4">Mix optimization</h1>
+        <div class="flex space-x-4">
+            <div class="w-1/2 bg-white p-4 rounded shadow">
+                <div class="mb-4">
+                    <h2 class="text-md text-gray-600 mb-2 flex items-center">
+                        <i class="fas fa-cog mr-2"></i> Default Settings
+                    </h2>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Material Lib</button>
+                        <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded">Cost Refine</button>
+                        <button class="bg-green-500 text-white px-4 py-2 rounded">Emission Data</button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded">Optimize</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h2 class="text-md text-gray-600 mb-2 flex items-center">
+                        <i class="fas fa-sliders-h mr-2"></i> Select a model
+                    </h2>
+                    <div class="flex space-x-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="model" class="form-radio text-blue-500" checked>
+                            <span class="ml-2">Budget-Friendly Green Option</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="model" class="form-radio text-blue-500">
+                            <span class="ml-2">Eco-Superior Option</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="model" class="form-radio text-blue-500">
+                            <span class="ml-2">Balance Option</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h2 class="text-md text-gray-600 mb-2 flex items-center">
+                        <i class="fas fa-flask mr-2"></i> Strength (21 days)
+                    </h2>
+                    <div id="slider-root"> </div>
+                    <!--<div class="flex items-center space-x-2">
+                        <span>30MPa</span>
+                        <input type="range" min="30" max="70" value="50" class="w-full">
+                        <span>70MPa</span>
+                        <input type="number" value="50" class="w-16 p-2 border rounded">
+                    </div> -->
+                </div>
+                <div>
+                    <h2 class="text-md text-gray-600 mb-2 flex items-center">
+                        <i class="fas fa-flask mr-2"></i> Mix Design
+                    </h2>
+                    <div id="mix-design-editable-table"></div>
+                </div>
+            </div>
+            <div class="w-1/2 bg-white p-4 rounded shadow">
+                <h2 class="text-md text-gray-600 mb-4 flex items-center">
+                    <i class="fas fa-chart-bar mr-2"></i> Cost and CO2 reduction
+                </h2>
+                <div class="mb-4">
+                    <h3 class="text-center font-semibold mb-2">Concrete Properties</h3>
+                    <div id="nivo-bar-chart-root"></div>
+                    
+                </div>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="border-b p-2">Performance</th>
+                            <th class="border-b p-2">Reference</th>
+                            <th class="border-b p-2">Optimized</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border-b p-2">Strength</td>
+                            <td class="border-b p-2">800 psi</td>
+                            <td class="border-b p-2">2000 psi</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2">Cost</td>
+                            <td class="border-b p-2">59 USD/cy</td>
+                            <td class="border-b p-2">127 USD/cy</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2">CO2</td>
+                            <td class="border-b p-2">2520 lbs/cy</td>
+                            <td class="border-b p-2">1280 lbs/cy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="{% static 'js/nivo-bar-chart-bundle.js' %}"></script>
+<script src="{% static 'js/SliderComponent-bundle.js' %}"></script>
+<script src="{% static 'js/MixDesignEditableTable-bundle.js' %}"></script>
+
+{% endblock %}

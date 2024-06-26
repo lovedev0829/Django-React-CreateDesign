@@ -89,6 +89,8 @@ urlpatterns = [
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("content/", include(wagtail_urls)),
+    # design
+    path('design/', include('apps.design.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.ENABLE_DEBUG_TOOLBAR:

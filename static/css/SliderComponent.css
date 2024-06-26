@@ -1,0 +1,13 @@
+/*!*******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./assets/styles/SliderComponent.css ***!
+  \*******************************************************************************************************************************/
+/* src/SliderComponent.css */
+.slider-container {
+    width: 50%;
+    margin: 50px auto;
+    text-align: center;
+  }
+.slider {
+    width: 100%;
+  }
+  

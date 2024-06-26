@@ -122,6 +122,7 @@ PROJECT_APPS = [
     "apps.web",
     "apps.teams.apps.TeamConfig",
     "apps.teams_example.apps.TeamsExampleConfig",
+    "apps.design",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PEGASUS_APPS + PROJECT_APPS + WAGTAIL_APPS
@@ -209,18 +210,17 @@ FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases
 
 if "DATABASE_URL" in env:
-    DATABASES = {"default": env.db()}
-else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": env("DJANGO_DATABASE_NAME", default="my_app"),
             "USER": env("DJANGO_DATABASE_USER", default="postgres"),
-            "PASSWORD": env("DJANGO_DATABASE_PASSWORD", default="***"),
+            "PASSWORD": env("DJANGO_DATABASE_PASSWORD", default="rootroot"),
             "HOST": env("DJANGO_DATABASE_HOST", default="localhost"),
             "PORT": env("DJANGO_DATABASE_PORT", default="5432"),
         }
-    }
+    }   
+
 
 # Auth / login stuff
 
