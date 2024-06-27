@@ -5,8 +5,8 @@ import {usePopper} from "react-popper";
 import {grey} from "./colors";
 import PlusIcon from "./img/Plus";
 import {randomColor} from "./utils";
-
-export default function Cell({value: initialValue, row: {index}, column: {id, dataType, options}, dataDispatch}) {
+import axios from 'axios';
+export default function Cell({rowId, value: initialValue, row: {index}, column: {id, dataType, options}, dataDispatch}) {
   const [value, setValue] = useState({value: initialValue, update: false});
   const [selectRef, setSelectRef] = useState(null);
   const [selectPop, setSelectPop] = useState(null);
@@ -23,7 +23,12 @@ export default function Cell({value: initialValue, row: {index}, column: {id, da
 
   useEffect(() => {
     if (value.update) {
-      dataDispatch({type: "update_cell", columnId: id, rowIndex: index, value: value.value});
+      (async function() {
+        await axios.post('/design/update_user_data', { rowId, id: value.value, }).then(() => {
+          console.log("success!");
+        });
+        dataDispatch({ type: "update_cell", columnId: id, rowIndex: index, value: value.value });
+      })();
     }
   }, [value, dataDispatch, id, index]);
 

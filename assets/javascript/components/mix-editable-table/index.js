@@ -1,13 +1,18 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import "./style.css";
-import makeData from "./makeData";
 import Table from "./Table";
 import { randomColor, shortId } from "./utils";
 import { grey } from "./colors";
 import { createRoot } from 'react-dom/client';
+import axios from 'axios';
 
 function reducer(state, action) {
   switch (action.type) {
+    case "init_state": 
+      return {
+         ...state,
+         ...action.payload
+      }
     case "add_option_to_column":
       const optionIndex = state.columns.findIndex(
         (column) => column.id === action.columnId
@@ -215,11 +220,21 @@ function reducer(state, action) {
 }
 
 function MixTableComponent() {
-  const [state, dispatch] = useReducer(reducer, makeData(10));
 
-  useEffect(() => {
+   const [state, dispatch] = useReducer(reducer, []);
+   useEffect(() => {
+    
+    const fetchData = async() => {
+      try {
+        const response = await axios.get('/design/get_user_data');
+        dispatch({ type: 'init_state', payload: response.data[0] })
+      } catch (error) {
+        console.error('Error fetching data', error);
+      }
+    }
+    fetchData()
     dispatch({ type: "enable_reset" });
-  }, [state.data, state.columns]);
+  }, []);
 
   return (
     <div
@@ -249,12 +264,16 @@ function MixTableComponent() {
             marginRight: "auto"
           }}
         >
-          <Table
-            columns={state.columns}
-            data={state.data}
-            dispatch={dispatch}
-            skipReset={state.skipReset}
-          />
+        {
+          state.data? (
+               <Table
+                  columns={state.columns}
+                  data={state.data}
+                  dispatch={dispatch}
+                  skipReset={state.skipReset}
+               />
+          ) : null
+        }
         </div>
       </div>
       <div

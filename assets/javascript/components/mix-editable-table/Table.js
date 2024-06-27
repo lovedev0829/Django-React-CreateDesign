@@ -83,7 +83,7 @@ export default function Table({columns, data, dispatch: dataDispatch, skipReset}
               <div key={i} {...row.getRowProps()} className='tr'>
                 {row.cells.map((cell) => (
                   <div key={cell.getCellProps().key} {...cell.getCellProps()} className='td'>
-                    {cell.render("Cell")}
+                    {cell.render("Cell", {rowId: row.original?.id})}
                   </div>
                 ))}
               </div>

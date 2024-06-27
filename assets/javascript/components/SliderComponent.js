@@ -34,20 +34,21 @@ const SliderComponent = () => {
   return (
     <>
         <div className="slider-container">
-        <input
-            type="range"
-            min="0"
-            max="100"
-            value={value}
-            className="slider"
-            onChange={handleChange}
-        />
-        <p>Value: <span>{value}</span></p>
-        </div>
+          <input
+              type="range"
+              min="0"
+              max="100"
+              value={value}
+              className="slider"
+              onChange={handleChange}
+          />
+          <p>Value: <span>{value}</span></p>
+          </div>
         <MixDesignTable data={data} />
     </>
   );
 };
+
 createRoot(document.getElementById('slider-root')).render(<SliderComponent />);
 
 
