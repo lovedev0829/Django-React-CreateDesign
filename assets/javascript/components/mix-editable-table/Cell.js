@@ -6,7 +6,7 @@ import {grey} from "./colors";
 import PlusIcon from "./img/Plus";
 import {randomColor} from "./utils";
 import axios from 'axios';
-export default function Cell({rowId, value: initialValue, row: {index}, column: {id, dataType, options}, dataDispatch}) {
+export default function Cell({rowId, changeRange, value: initialValue, row: {index}, column: {id, dataType, options}, dataDispatch}) {
   const [value, setValue] = useState({value: initialValue, update: false});
   const [selectRef, setSelectRef] = useState(null);
   const [selectPop, setSelectPop] = useState(null);
@@ -24,8 +24,9 @@ export default function Cell({rowId, value: initialValue, row: {index}, column: 
   useEffect(() => {
     if (value.update) {
       (async function() {
-        await axios.post('/design/update_user_data', { rowId, id: value.value, }).then(() => {
-          console.log("success!");
+        await axios.post('/design/update_user_data/', { rowId, field: id, value: value.value, }).then((res) => {
+          const { newRange } = res?.data;
+          changeRange(newRange);
         });
         dataDispatch({ type: "update_cell", columnId: id, rowIndex: index, value: value.value });
       })();

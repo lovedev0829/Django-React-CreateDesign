@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 
 import MixDesignTable from './MixDesignTable';
+import MixEditableTableComponent from './mix-editable-table'
 
 import '../../styles/SliderComponent.css';
 
@@ -30,25 +31,30 @@ const SliderComponent = () => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  
+  const setNewRange = (newRange) => {
+    console.log(newRange)
+    setValue(newRange)
+  }
 
   return (
     <>
         <div className="slider-container">
-          <input
-              type="range"
-              min="0"
-              max="100"
-              value={value}
-              className="slider"
-              onChange={handleChange}
-          />
-          <p>Value: <span>{value}</span></p>
-          </div>
+        <input
+            type="range"
+            min="0"
+            max="100"
+            value={value}
+            className="slider"
+            onChange={handleChange}
+        />
+        <p>Value: <span>{value}</span></p>
+        </div>
         <MixDesignTable data={data} />
+        <MixEditableTableComponent changeRange={setNewRange} range={value}/>
     </>
   );
 };
-
 createRoot(document.getElementById('slider-root')).render(<SliderComponent />);
 
 

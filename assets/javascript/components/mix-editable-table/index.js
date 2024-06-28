@@ -219,7 +219,7 @@ function reducer(state, action) {
   }
 }
 
-function MixTableComponent() {
+export default function MixEditableTableComponent(props) {
 
    const [state, dispatch] = useReducer(reducer, []);
    useEffect(() => {
@@ -234,7 +234,7 @@ function MixTableComponent() {
     }
     fetchData()
     dispatch({ type: "enable_reset" });
-  }, []);
+  }, [props.range]);
 
   return (
     <div
@@ -267,6 +267,7 @@ function MixTableComponent() {
         {
           state.data? (
                <Table
+                  changeRange={props.changeRange}
                   columns={state.columns}
                   data={state.data}
                   dispatch={dispatch}
@@ -298,5 +299,3 @@ function MixTableComponent() {
     </div>
   );
 }
-
-createRoot(document.getElementById('mix-design-editable-table')).render(<MixTableComponent />);

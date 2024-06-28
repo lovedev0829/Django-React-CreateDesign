@@ -14,7 +14,7 @@ const defaultColumn = {
   sortType: "alphanumericFalsyLast"
 };
 
-export default function Table({columns, data, dispatch: dataDispatch, skipReset}) {
+export default function Table({changeRange, columns, data, dispatch: dataDispatch, skipReset}) {
   const sortTypes = useMemo(
     () => ({
       alphanumericFalsyLast(rowA, rowB, columnId, desc) {
@@ -83,7 +83,7 @@ export default function Table({columns, data, dispatch: dataDispatch, skipReset}
               <div key={i} {...row.getRowProps()} className='tr'>
                 {row.cells.map((cell) => (
                   <div key={cell.getCellProps().key} {...cell.getCellProps()} className='td'>
-                    {cell.render("Cell", {rowId: row.original?.id})}
+                    {cell.render("Cell", {rowId: row.original?.id, changeRange})}
                   </div>
                 ))}
               </div>
